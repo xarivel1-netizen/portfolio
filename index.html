@@ -291,6 +291,16 @@ html[data-lang="en"] .lang .pill{transform:translateX(100%)}
 .thumbs button:hover{opacity:1;transform:translateY(-2px)}
 .thumbs button.active{opacity:1;border-color:var(--accent);box-shadow:0 0 0 2px rgba(14,122,92,.25)}
 
+/* screenshot arrows (mobile) */
+.shot-nav{display:none;position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;z-index:4;
+  place-items:center;border-radius:50%;cursor:pointer;color:var(--accent-3);
+  background:rgba(255,255,255,.82);border:1px solid var(--glass-border);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 18px -8px rgba(60,48,26,.4)}
+.shot-nav svg{width:22px;height:22px}
+.shot-nav:active{transform:translateY(-50%) scale(.92)}
+.shot-nav.prev{left:14px}
+.shot-nav.next{right:14px}
+
 /* ============ CONTACT ============ */
 .contact-card{border-radius:var(--radius-xl);padding:64px 48px;text-align:center;position:relative;overflow:hidden}
 .contact-card::before{content:'';position:absolute;inset:0;background:var(--accent-grad);opacity:.05;z-index:-1}
@@ -334,6 +344,8 @@ html[data-lang="en"] [data-en]{display:revert}
   .card.feat .card-media{border-right:0;border-bottom:1px solid var(--glass-border);min-height:220px}
   .card.feat .card-body{padding:26px 28px 28px}
   .note{margin:0 auto}
+  #allowed-thumbs{display:none}
+  .shot-nav{display:grid}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none !important;transition-duration:.01ms !important}
@@ -562,6 +574,8 @@ html[data-lang="en"] [data-en]{display:revert}
           <div class="win-bar"><i></i><i></i><i></i><span class="win-url">a11owed · private mesh</span></div>
           <div class="win-shot"><img id="allowed-main" src="screens/allowed-1.png" alt="Allowed — экран входа по инвайту" /></div>
         </div>
+        <button class="shot-nav prev" id="allowed-prev" aria-label="Предыдущий скрин"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="shot-nav next" id="allowed-next" aria-label="Следующий скрин"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
       <div class="card-body">
         <span class="card-tag">Self-hosted · <span data-ru>приватный мессенджер</span><span data-en>private messenger</span></span>
@@ -691,13 +705,19 @@ mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.
 /* ===== ALLOWED GALLERY ===== */
 (function(){
   const main=document.getElementById('allowed-main');
-  const thumbs=document.querySelectorAll('#allowed-thumbs button');
-  thumbs.forEach(b=>b.addEventListener('click',(e)=>{
-    e.stopPropagation();
-    main.src=b.dataset.src;
-    thumbs.forEach(t=>t.classList.remove('active'));
-    b.classList.add('active');
-  }));
+  const thumbs=[...document.querySelectorAll('#allowed-thumbs button')];
+  const srcs=thumbs.map(t=>t.dataset.src);
+  let idx=0;
+  function show(i){
+    idx=(i+srcs.length)%srcs.length;
+    main.src=srcs[idx];
+    thumbs.forEach((t,k)=>t.classList.toggle('active',k===idx));
+  }
+  thumbs.forEach((b,k)=>b.addEventListener('click',e=>{e.stopPropagation();show(k);}));
+  const prev=document.getElementById('allowed-prev');
+  const next=document.getElementById('allowed-next');
+  if(prev)prev.addEventListener('click',e=>{e.stopPropagation();show(idx-1);});
+  if(next)next.addEventListener('click',e=>{e.stopPropagation();show(idx+1);});
 })();
 
 /* ===== HERO SCENE PARALLAX ===== */
