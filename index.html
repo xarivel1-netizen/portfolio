@@ -684,7 +684,7 @@ document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',
 
 /* ===== MOBILE MENU ===== */
 const mm=document.getElementById('mmenu');
-document.getElementById('burger').onclick=()=>mm.classList.add('open');
+document.getElementById('burger').onclick=()=>mm.classList.toggle('open');
 document.getElementById('mclose').onclick=()=>mm.classList.remove('open');
 mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
 
