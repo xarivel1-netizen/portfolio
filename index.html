@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio — Telegram Bots, Web Apps, Landings</title>
+<meta name="description" content="Портфолио: Telegram-боты, TG Web App, лендинги и сайты." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ============ TOKENS — Warm Cream Minimal ============ */
+:root{
+  --bg:#FBF8F3;
+  --bg-2:#F3EEE4;
+  --surface: rgba(255,255,255,0.60);
+  --surface-strong: rgba(255,255,255,0.82);
+  --glass-border: rgba(34,28,20,0.09);
+  --glass-border-strong: rgba(34,28,20,0.16);
+
+  --text:#1A1611;
+  --text-2:#5E584D;
+  --text-3:#9A9183;
+
+  --accent:#0E7A5C;
+  --accent-2:#0C8F8F;
+  --accent-3:#0B6A4E;
+  --accent-grad: linear-gradient(120deg,#0F8A63 0%, #0E7A5C 50%, #0C8F8F 100%);
+
+  --radius-sm:12px;
+  --radius:18px;
+  --radius-lg:24px;
+  --radius-xl:32px;
+
+  --shadow-glass: 0 16px 44px -22px rgba(60,48,26,0.24), 0 2px 6px -3px rgba(60,48,26,0.06);
+  --shadow-glow: 0 0 0 1px var(--glass-border-strong), 0 26px 60px -30px rgba(14,122,92,0.30);
+
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.font-display{font-family:'Space Grotesk','Inter',sans-serif;letter-spacing:-0.02em;line-height:1.08;font-weight:600}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:rgba(14,122,92,0.18);color:var(--accent-3)}
+
+/* ============ BACKGROUND FX (subtle) ============ */
+.bg-fx{position:fixed;inset:0;z-index:-2;overflow:hidden;
+  background:radial-gradient(130% 120% at 50% -10%, #FFFDF9 0%, var(--bg) 52%, var(--bg-2) 100%);}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.30}
+.blob.b1{width:620px;height:620px;background:radial-gradient(circle,#bfe8d6,transparent 70%);top:-200px;left:-140px;animation:float1 20s var(--ease) infinite alternate}
+.blob.b2{width:520px;height:520px;background:radial-gradient(circle,#cfeceb,transparent 70%);top:32%;right:-180px;animation:float2 24s var(--ease) infinite alternate}
+.blob.b3{width:480px;height:480px;background:radial-gradient(circle,#f3e6c9,transparent 70%);bottom:-180px;left:34%;animation:float3 22s var(--ease) infinite alternate}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+@keyframes float1{to{transform:translate(70px,50px) scale(1.08)}}
+@keyframes float2{to{transform:translate(-60px,40px) scale(1.05)}}
+@keyframes float3{to{transform:translate(40px,-40px) scale(1.1)}}
+
+/* ============ GLASS ============ */
+.glass{
+  background:var(--surface);
+  backdrop-filter:blur(16px) saturate(120%);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--shadow-glass);
+}
+
+/* ============ LAYOUT ============ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{position:relative;padding:120px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-3);
+  padding:7px 14px;border-radius:100px;background:rgba(14,122,92,0.07);border:1px solid var(--glass-border)}
+.eyebrow svg{width:15px;height:15px}
+.section-head{max-width:640px;margin-bottom:56px}
+.section-head h2{font-size:clamp(30px,4.5vw,46px);margin:20px 0 14px}
+.section-head p{color:var(--text-2);font-size:17px;margin:0}
+
+/* ============ NAV ============ */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:padding .4s var(--ease)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin:16px auto;max-width:var(--maxw);padding:12px 14px 12px 20px;border-radius:100px}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:600;font-size:17px}
+.brand .mark{width:34px;height:34px;border-radius:11px;background:var(--accent-grad);display:grid;place-items:center;color:#fff;box-shadow:0 6px 18px -6px rgba(14,122,92,.55)}
+.brand .mark svg{width:19px;height:19px}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{padding:9px 15px;border-radius:100px;font-size:14.5px;color:var(--text-2);font-weight:500;transition:.25s var(--ease)}
+.nav-links a:hover{color:var(--text);background:rgba(34,28,20,0.05)}
+.nav-right{display:flex;align-items:center;gap:10px}
+
+/* lang toggle */
+.lang{display:flex;padding:4px;border-radius:100px;background:rgba(34,28,20,0.05);border:1px solid var(--glass-border);position:relative}
+.lang button{position:relative;z-index:2;border:0;background:transparent;color:var(--text-2);font-weight:600;font-size:13px;
+  padding:6px 13px;border-radius:100px;cursor:pointer;transition:color .3s var(--ease);font-family:inherit}
+.lang button.active{color:#fff}
+.lang .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:100px;background:var(--accent-grad);
+  transition:transform .35s var(--ease);z-index:1;box-shadow:0 4px 12px -4px rgba(14,122,92,.5)}
+html[data-lang="en"] .lang .pill{transform:translateX(100%)}
+
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;padding:12px 22px;border-radius:100px;cursor:pointer;
+  border:1px solid transparent;transition:.3s var(--ease);font-family:inherit;white-space:nowrap}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:var(--accent-grad);color:#fff;box-shadow:0 10px 26px -12px rgba(14,122,92,.5)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px -14px rgba(14,122,92,.6)}
+.btn-ghost{background:rgba(255,255,255,0.6);border-color:var(--glass-border);color:var(--text)}
+.btn-ghost:hover{background:#fff;border-color:var(--glass-border-strong);transform:translateY(-2px)}
+
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,0.6);cursor:pointer;place-items:center}
+.burger svg{width:20px;height:20px;color:var(--text)}
+
+/* ============ HERO ============ */
+.hero{padding-top:190px;padding-bottom:80px}
+.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(40px,7vw,74px);font-weight:700;margin:22px 0}
+.hero h1 .grad{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:19px;color:var(--text-2);max-width:520px;margin:0 0 34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.stats{display:flex;gap:34px;flex-wrap:wrap}
+.stat .n{font-family:'Space Grotesk';font-size:30px;font-weight:700;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{font-size:13.5px;color:var(--text-3);margin-top:2px}
+
+/* hero visual — phone mock (device stays dark = realistic) */
+.hero-visual{position:relative;display:grid;place-items:center;min-height:440px}
+.phone{width:270px;height:540px;border-radius:44px;padding:12px;position:relative;z-index:3;
+  background:linear-gradient(160deg,#1c2320,#0e1512);border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 40px 90px -34px rgba(40,60,52,.5), 0 8px 24px -12px rgba(0,0,0,.2);animation:phoneFloat 6s var(--ease) infinite alternate}
+@keyframes phoneFloat{to{transform:translateY(-16px)}}
+.phone .notch{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:96px;height:26px;background:#05100c;border-radius:100px;z-index:5}
+.phone .screen{width:100%;height:100%;border-radius:33px;overflow:hidden;background:radial-gradient(120% 80% at 30% 0%, #10362c 0%, #081512 60%);position:relative;display:flex;flex-direction:column}
+.tg-top{padding:34px 16px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.tg-top .ava{width:38px;height:38px;border-radius:50%;background:var(--accent-grad)}
+.tg-top .ti{font-size:13.5px;font-weight:600;color:#fff}
+.tg-top .ti small{display:block;font-size:10.5px;color:#5eead4;font-weight:500}
+.tg-body{flex:1;padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+.bubble{max-width:80%;padding:10px 13px;border-radius:16px;font-size:12.5px;line-height:1.45}
+.bubble.in{align-self:flex-start;background:rgba(255,255,255,.08);border-bottom-left-radius:5px;color:#e9f3ef}
+.bubble.out{align-self:flex-end;background:var(--accent-grad);color:#fff;font-weight:500;border-bottom-right-radius:5px}
+.tg-kb{padding:10px 12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.tg-kb span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:9px;text-align:center;font-size:11px;color:#e9f3ef;font-weight:500}
+.tg-kb span:first-child{grid-column:1/3;background:rgba(94,234,212,.16);color:#5eead4}
+.floaty{position:absolute;border-radius:16px;padding:13px 16px;z-index:4;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--text)}
+.floaty svg{width:20px;height:20px;color:var(--accent)}
+.floaty.f1{top:40px;right:0;animation:phoneFloat 5s var(--ease) .5s infinite alternate}
+.floaty.f2{bottom:60px;left:-14px;animation:phoneFloat 7s var(--ease) infinite alternate}
+
+/* hero scene — floating glass cards */
+.scene{position:relative;width:360px;height:440px}
+.g-wrap{position:absolute;will-change:transform;transition:transform .35s var(--ease)}
+.g-card{border-radius:18px;background:var(--surface-strong);
+  backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%);
+  border:1px solid var(--glass-border);box-shadow:var(--shadow-glass);padding:15px 18px}
+.g-card.float{animation:cardFloat var(--dur,7s) var(--ease) infinite alternate}
+@keyframes cardFloat{to{transform:translateY(-13px)}}
+
+.w-code{left:26px;top:120px;z-index:3}
+.w-stat{left:-8px;top:56px;z-index:4}
+.w-status{right:-10px;top:28px;z-index:6}
+.w-metric{left:0;top:338px;z-index:4}
+.w-icon{right:14px;top:300px;z-index:6}
+
+.c-code{width:300px;padding:0;overflow:hidden}
+.code-bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;border-bottom:1px solid var(--glass-border);background:rgba(34,28,20,.03)}
+.code-bar i{width:9px;height:9px;border-radius:50%;flex:none}
+.code-bar i:nth-child(1){background:#ff5f57}.code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
+.code-bar span{margin-left:8px;font:500 11px ui-monospace,'SFMono-Regular',monospace;color:var(--text-3)}
+.c-code pre{margin:0;padding:16px 18px;font:500 12.5px/1.7 ui-monospace,'SFMono-Regular',monospace;color:var(--text-2);white-space:pre;overflow:hidden}
+.t-kw{color:#0C8F8F}.t-fn{color:#0E7A5C;font-weight:600}.t-str{color:#A5790B}.t-com{color:var(--text-3)}.t-p{color:var(--text-2)}
+
+.mini{font-size:13px;font-weight:600;color:var(--text)}
+.c-stat .n{font-family:'Space Grotesk';font-size:34px;font-weight:700;line-height:1;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.c-stat .l{font-size:12px;color:var(--text-3);margin-top:4px}
+.c-status{display:flex;align-items:center;gap:9px}
+.c-status .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(14,122,92,.5);animation:pulse 2.2s var(--ease) infinite;flex:none}
+.c-metric .l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+.c-metric .v{font-family:'Space Grotesk';font-size:20px;font-weight:700;color:var(--text);margin:2px 0 8px}
+.c-icon{width:56px;height:56px;display:grid;place-items:center;padding:0}
+.c-icon svg{width:26px;height:26px;color:var(--accent-3)}
+@media (max-width:900px){.scene{transform:scale(.88)}}
+@media (prefers-reduced-motion:reduce){.g-card.float{animation:none}}
+
+/* marquee */
+.marquee{margin-top:70px;border-radius:var(--radius);overflow:hidden;padding:18px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee-track{display:flex;gap:52px;width:max-content;animation:scrollx 26s linear infinite;align-items:center}
+.marquee-track span{display:flex;align-items:center;gap:10px;color:var(--text-3);font-size:15px;font-weight:500;white-space:nowrap}
+.marquee-track svg{width:18px;height:18px;color:var(--accent)}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* ============ ABOUT / SKILLS ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.about-card{border-radius:var(--radius-lg);padding:34px}
+.about-card h3{font-size:22px;margin:18px 0 10px}
+.about-card p{color:var(--text-2);margin:0;font-size:15.5px}
+.ic{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:rgba(14,122,92,0.08);border:1px solid var(--glass-border)}
+.ic svg{width:26px;height:26px;color:var(--accent-3)}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{padding:9px 16px;border-radius:100px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);
+  font-size:13.5px;font-weight:500;color:var(--text-2)}
+
+/* human touches */
+.hand{font-family:'Caveat',cursive;font-weight:600;color:var(--accent-3);letter-spacing:0}
+.now{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--text-2);margin-top:20px}
+.now .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(14,122,92,.5);animation:pulse 2.2s var(--ease) infinite}
+.now b{color:var(--text);font-weight:600}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,122,92,.45)}70%{box-shadow:0 0 0 9px rgba(14,122,92,0)}100%{box-shadow:0 0 0 0 rgba(14,122,92,0)}}
+
+.bio{border-radius:var(--radius-lg);padding:36px 38px;position:relative}
+.bio .sig{font-family:'Caveat',cursive;font-size:34px;color:var(--text);margin-top:20px;line-height:1}
+.bio .sig small{display:block;font-family:'Inter';font-size:12.5px;color:var(--text-3);font-weight:500;letter-spacing:.04em;margin-top:6px}
+.bio p{font-size:16.5px;color:var(--text);line-height:1.7;margin:0 0 14px}
+.bio p .mark-t{background:rgba(14,122,92,.14);padding:1px 5px;border-radius:5px}
+.bio p.small{font-size:14.5px;color:var(--text-2)}
+
+/* sticky note (paper yellow) */
+.note{font-family:'Caveat',cursive;font-size:20px;line-height:1.35;color:#4a3f13;
+  background:linear-gradient(180deg,#FDF6C4,#FBEA97);padding:20px 22px 24px;border-radius:3px;
+  box-shadow:0 16px 34px -18px rgba(90,70,20,.4);transform:rotate(-2.4deg);position:relative;max-width:260px}
+.note::before{content:'';position:absolute;top:-11px;left:50%;transform:translateX(-50%) rotate(3deg);
+  width:92px;height:26px;background:rgba(255,255,255,.45);border:1px dashed rgba(0,0,0,.12);border-radius:2px}
+.note b{font-weight:600}
+
+/* ============ PROJECTS ============ */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card{border-radius:var(--radius-lg);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease);cursor:pointer;position:relative}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow-glow)}
+.card:hover .media-inner{transform:scale(1.04)}
+.card:hover .go{opacity:1;transform:translate(0,0)}
+.card-media{position:relative;height:230px;overflow:hidden;border-bottom:1px solid var(--glass-border);background:#f0ece2}
+.card-media img{width:100%;height:100%;object-fit:cover;object-position:top}
+.media-inner{position:absolute;inset:0;transition:transform .7s var(--ease);display:grid;place-items:center}
+.mock-window{width:82%;height:78%;border-radius:14px 14px 0 0;background:rgba(255,255,255,.72);border:1px solid var(--glass-border-strong);
+  border-bottom:0;overflow:hidden;box-shadow:0 16px 40px -20px rgba(60,48,26,.3);align-self:end}
+.mock-bar{height:32px;display:flex;align-items:center;gap:6px;padding:0 12px;background:rgba(34,28,20,.03);border-bottom:1px solid var(--glass-border)}
+.mock-bar i{width:9px;height:9px;border-radius:50%;background:rgba(34,28,20,.14)}
+.mock-body{padding:16px;display:flex;flex-direction:column;gap:8px}
+.mock-body .ln{height:9px;border-radius:5px;background:rgba(34,28,20,.08)}
+.mock-body .ln.g{background:var(--accent-grad);opacity:.9}
+.p2 .media-inner{background:linear-gradient(135deg,#e7f4ee,#f4efe5)}
+.p3 .media-inner{background:linear-gradient(135deg,#e9f3f2,#f4efe5)}
+.p4 .media-inner{background:linear-gradient(135deg,#eef4ea,#f2ede3)}
+.card-body{padding:26px 28px 28px}
+.card-tag{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-3)}
+.card-body h3{font-size:22px;margin:12px 0 10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-body h3 .go{width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;background:rgba(14,122,92,.1);
+  border:1px solid var(--glass-border);opacity:0;transform:translate(-6px,6px);transition:.4s var(--ease)}
+.card-body h3 .go svg{width:17px;height:17px;color:var(--accent-3)}
+.card-body p{color:var(--text-2);font-size:15px;margin:0 0 18px}
+.tstack{display:flex;flex-wrap:wrap;gap:7px}
+.tstack span{font-size:12px;padding:5px 11px;border-radius:8px;background:rgba(255,255,255,.6);border:1px solid var(--glass-border);color:var(--text-3)}
+
+/* featured project (asymmetric bento) */
+.card.feat{grid-column:1 / -1;display:grid;grid-template-columns:1.2fr .8fr}
+.card.feat .card-media{height:100%;border-bottom:0;border-right:1px solid var(--glass-border);
+  background:linear-gradient(135deg,#eef4f1,#f4efe6);display:grid;place-items:center;padding:24px;overflow:hidden}
+/* vector app window that holds the real screenshot (no crop) */
+.win{width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#0e1512;
+  box-shadow:0 24px 54px -26px rgba(40,52,44,.55), 0 4px 14px -8px rgba(0,0,0,.25)}
+.win-bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#141b18;border-bottom:1px solid rgba(255,255,255,.06)}
+.win-bar i{width:10px;height:10px;border-radius:50%;flex:none}
+.win-bar i:nth-child(1){background:#ff5f57}.win-bar i:nth-child(2){background:#febc2e}.win-bar i:nth-child(3){background:#28c840}
+.win-url{margin-left:12px;font-size:11px;color:#7a8a84;font-family:ui-monospace,'SFMono-Regular',monospace;
+  background:rgba(255,255,255,.05);padding:3px 11px;border-radius:6px;letter-spacing:.02em}
+.win-shot{line-height:0;background:#0e1512}
+.card.feat .win-shot img{width:100%;height:auto;object-fit:contain;object-position:top;display:block}
+.card.feat .card-body{padding:36px 40px;align-self:center}
+.card.feat h3{font-size:27px}
+.card.feat p{font-size:16px}
+.card .metric{display:inline-flex;align-items:center;gap:7px;margin:0 0 16px;font-size:13px;font-weight:600;
+  color:var(--accent-3);background:rgba(14,122,92,.08);border:1px solid var(--glass-border);padding:6px 12px;border-radius:100px}
+.card .metric svg{width:14px;height:14px}
+
+/* gallery thumbs */
+.thumbs{display:flex;gap:10px;margin:18px 0 2px}
+.thumbs button{padding:0;border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;cursor:pointer;background:#0e1512;
+  width:76px;height:50px;transition:.25s var(--ease);opacity:.6}
+.thumbs button img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.thumbs button:hover{opacity:1;transform:translateY(-2px)}
+.thumbs button.active{opacity:1;border-color:var(--accent);box-shadow:0 0 0 2px rgba(14,122,92,.25)}
+
+/* ============ CONTACT ============ */
+.contact-card{border-radius:var(--radius-xl);padding:64px 48px;text-align:center;position:relative;overflow:hidden}
+.contact-card::before{content:'';position:absolute;inset:0;background:var(--accent-grad);opacity:.05;z-index:-1}
+.contact-card h2{font-size:clamp(30px,5vw,52px);margin:0 0 16px}
+.contact-card p{color:var(--text-2);font-size:18px;max-width:460px;margin:0 auto 34px}
+.contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.socials{display:flex;gap:12px;justify-content:center;margin-top:40px}
+.socials a{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.6);
+  border:1px solid var(--glass-border);color:var(--text-2);transition:.3s var(--ease)}
+.socials a:hover{color:var(--accent-3);border-color:var(--glass-border-strong);transform:translateY(-3px);background:#fff}
+.socials svg{width:21px;height:21px}
+
+/* ============ FOOTER ============ */
+footer{padding:40px 0;border-top:1px solid var(--glass-border);margin-top:40px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--text-3);font-size:14px}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+
+/* ============ LANG VISIBILITY ============ */
+[data-en]{display:none}
+html[data-lang="en"] [data-ru]{display:none}
+html[data-lang="en"] [data-en]{display:revert}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-visual{order:-1;min-height:auto}
+  .about-grid,.proj-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-right .btn{display:none}
+  .burger{display:grid}
+  section{padding:88px 0}
+  .hero{padding-top:150px}
+  .contact-card{padding:48px 24px}
+  .card.feat{grid-template-columns:1fr}
+  .card.feat .card-media{border-right:0;border-bottom:1px solid var(--glass-border);min-height:220px}
+  .card.feat .card-body{padding:26px 28px 28px}
+  .note{margin:0 auto}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+.mmenu{position:fixed;inset:0;z-index:99;background:rgba(251,248,243,.88);backdrop-filter:blur(16px);display:none;flex-direction:column;
+  align-items:center;justify-content:center;gap:14px}
+.mmenu.open{display:flex}
+.mmenu a{font-family:'Space Grotesk';font-size:26px;font-weight:600;color:var(--text)}
+.mmenu .btn{margin-top:14px}
+.mclose{position:absolute;top:26px;right:24px;width:46px;height:46px;border-radius:13px;border:1px solid var(--glass-border);background:rgba(255,255,255,.7);color:var(--text);display:grid;place-items:center;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="bg-fx"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grain"></div>
+
+<!-- ============ NAV ============ -->
+<header>
+  <nav class="nav glass wrap">
+    <a class="brand" href="#top">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6-6 6 6"/><path d="M6 15l6 6 6-6"/></svg>
+      </span>
+      <span>Portfolio</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about" data-ru>О себе</a><a href="#about" data-en>About</a>
+      <a href="#projects" data-ru>Проекты</a><a href="#projects" data-en>Projects</a>
+      <a href="#contact" data-ru>Контакты</a><a href="#contact" data-en>Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <div class="pill" aria-hidden="true"></div>
+        <button data-set="ru" class="active">RU</button>
+        <button data-set="en">EN</button>
+      </div>
+      <a href="#contact" class="btn btn-primary" style="padding:10px 18px">
+        <span data-ru>Написать</span><span data-en>Get in touch</span>
+      </a>
+      <button class="burger" aria-label="Menu" id="burger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- mobile menu -->
+<div class="mmenu" id="mmenu">
+  <button class="mclose" id="mclose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <a href="#about" data-ru>О себе</a><a href="#about" data-en>About</a>
+  <a href="#projects" data-ru>Проекты</a><a href="#projects" data-en>Projects</a>
+  <a href="#contact" data-ru>Контакты</a><a href="#contact" data-en>Contact</a>
+  <a href="#contact" class="btn btn-primary"><span data-ru>Написать</span><span data-en>Get in touch</span></a>
+</div>
+
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="hero-inner">
+    <div>
+      <!-- ЗАМЕНИ «Артём» на своё имя во всех местах -->
+      <span class="eyebrow reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg>
+        <span data-ru>Привет, я <b style="color:var(--text);font-weight:600">&nbsp;Артём</b></span><span data-en>Hey, I'm <b style="color:var(--text);font-weight:600">&nbsp;Artem</b></span>
+      </span>
+
+      <h1 class="reveal" data-d="1">
+        <span data-ru>Делаю <span class="grad">Telegram-ботов</span>, которыми пользуются каждый день</span>
+        <span data-en>I make <span class="grad">Telegram bots</span> people actually use every day</span>
+      </h1>
+
+      <p class="lead reveal" data-d="2">
+        <span data-ru>Три года назад собрал первого бота за ночь — и залип. Теперь живу в Bot API, пишу на Python, а ради красивого лендинга ухожу во фронтенд. Шаблоны и лишние клики не люблю.</span>
+        <span data-en>Three years ago I hacked together my first bot overnight and got hooked. Now I basically live in the Bot API, write Python, and dip into frontend whenever a landing deserves it. Not a fan of templates or extra clicks.</span>
+      </p>
+
+      <div class="now reveal" data-d="2">
+        <span class="dot"></span>
+        <span data-ru><b>Сейчас:</b>&nbsp;пилю Web App для доставки и переписываю свой бот-конструктор</span>
+        <span data-en><b>Right now:</b>&nbsp;building a delivery Web App and rewriting my own bot builder</span>
+      </div>
+
+      <div class="hero-cta reveal" data-d="2">
+        <a href="#projects" class="btn btn-primary">
+          <span data-ru>Смотреть проекты</span><span data-en>View projects</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+          <span data-ru>Связаться</span><span data-en>Contact me</span>
+        </a>
+      </div>
+
+      <div class="stats reveal" data-d="3">
+        <div class="stat"><div class="n">~40</div><div class="l"><span data-ru>ботов в проде</span><span data-en>bots in prod</span></div></div>
+        <div class="stat"><div class="n">2021</div><div class="l"><span data-ru>с этого года в деле</span><span data-en>doing this since</span></div></div>
+        <div class="stat"><div class="n">&lt; 3ч</div><div class="l"><span data-ru>обычно отвечаю</span><span data-en>usual reply time</span></div></div>
+      </div>
+    </div>
+
+    <!-- hero visual — floating glass cards -->
+    <div class="hero-visual reveal" data-d="2">
+      <div class="scene">
+
+        <div class="g-wrap w-stat" data-depth="26"><div class="g-card float c-stat" style="--dur:6s">
+          <div class="n">~40</div><div class="l"><span data-ru>ботов в проде</span><span data-en>bots in prod</span></div>
+        </div></div>
+
+        <div class="g-wrap w-status" data-depth="30"><div class="g-card float c-status" style="--dur:5.5s">
+          <span class="dot"></span><span class="mini"><span data-ru>онлайн 24/7</span><span data-en>online 24/7</span></span>
+        </div></div>
+
+        <div class="g-wrap w-code" data-depth="10"><div class="g-card float c-code" style="--dur:7s">
+          <div class="code-bar"><i></i><i></i><i></i><span>bot.py</span></div>
+<pre><span class="t-kw">@dp</span><span class="t-p">.message(</span><span class="t-fn">Command</span><span class="t-p">(</span><span class="t-str">"start"</span><span class="t-p">))</span>
+<span class="t-kw">async def</span> <span class="t-fn">start</span><span class="t-p">(m):</span>
+    <span class="t-kw">await</span> m<span class="t-p">.</span><span class="t-fn">answer</span><span class="t-p">(</span><span class="t-str">"Готово"</span><span class="t-p">)</span>
+<span class="t-com" data-ru># деплой в один клик</span><span class="t-com" data-en># one-click deploy</span></pre>
+        </div></div>
+
+        <div class="g-wrap w-metric" data-depth="20"><div class="g-card float c-metric" style="--dur:8s">
+          <div class="l">uptime</div><div class="v">99.9%</div>
+          <svg width="118" height="30" viewBox="0 0 118 30" fill="none" aria-hidden="true">
+            <polyline points="0,22 17,16 33,19 50,9 67,13 84,5 101,10 118,4" stroke="url(#gl)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="gl" x1="0" y1="0" x2="118" y2="0"><stop stop-color="#0F8A63"/><stop offset="1" stop-color="#0C8F8F"/></linearGradient></defs>
+          </svg>
+        </div></div>
+
+        <div class="g-wrap w-icon" data-depth="34"><div class="g-card float c-icon" style="--dur:6.5s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+        </div></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- marquee -->
+  <div class="marquee glass reveal">
+    <div class="marquee-track" id="mq"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="wrap">
+  <div class="section-head reveal">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+      <span data-ru>О себе</span><span data-en>About</span>
+    </span>
+    <h2><span data-ru>Немного о том, как я работаю</span><span data-en>A bit about how I work</span></h2>
+    <p>
+      <span data-ru>Беру задачу целиком — от «а можно вот такое?» до кнопки «запустить». Без прослоек из менеджеров и без «давайте на следующей неделе».</span>
+      <span data-en>I take the whole thing — from &laquo;can we do this?&raquo; to the launch button. No layers of managers, no &laquo;let's circle back next week&raquo;.</span>
+    </p>
+  </div>
+
+  <!-- bio + note -->
+  <div class="about-grid" style="align-items:stretch;margin-bottom:24px">
+    <div class="bio glass reveal">
+      <p data-ru>Если честно — я из тех, кто <span class="mark-t">открывает редактор в 2 ночи</span>, потому что «ну ещё вот эту мелочь докручу». Люблю, когда бот отвечает мгновенно, а лендинг грузится раньше, чем ты успел моргнуть.</p>
+      <p data-en>Honestly — I'm the guy who <span class="mark-t">opens the editor at 2am</span> because &laquo;just one more tiny thing&raquo;. I like it when a bot replies instantly and a landing loads before you even blink.</p>
+      <p class="small" data-ru>Из инструментов — Python и aiogram по любви, React когда нужно что-то живое. Остальное подтягиваю под задачу, а не наоборот.</p>
+      <p class="small" data-en>Tools-wise it's Python + aiogram out of love, React when something needs to feel alive. The rest I pick per task, not the other way around.</p>
+      <div class="sig">Артём<small><span data-ru>— ну, будем знакомы</span><span data-en>— nice to meet you</span></small></div>
+    </div>
+    <div class="reveal" data-d="1" style="display:grid;place-items:center">
+      <div class="note">
+        <b data-ru>P.S.</b><b data-en>P.S.</b>
+        <span data-ru> сайт сверстал сам, руками. никаких конструкторов :)</span>
+        <span data-en> built this site by hand. no page builders :)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-card glass reveal" data-d="1">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></div>
+      <h3><span data-ru>Боты &amp; автоматизация</span><span data-en>Bots &amp; automation</span></h3>
+      <p><span data-ru>Telegram-боты любой сложности: магазины, оплата, рассылки, CRM-интеграции, админ-панели.</span><span data-en>Telegram bots of any complexity: shops, payments, broadcasts, CRM integrations, admin panels.</span></p>
+    </div>
+    <div class="about-card glass reveal" data-d="2">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
+      <h3><span data-ru>TG Web App</span><span data-en>TG Web Apps</span></h3>
+      <p><span data-ru>Мини-приложения внутри Telegram: каталоги, личные кабинеты, игры и сервисы с нативным ощущением.</span><span data-en>Mini apps inside Telegram: catalogs, dashboards, games and services with a native feel.</span></p>
+    </div>
+    <div class="about-card glass reveal" data-d="1">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div>
+      <h3><span data-ru>Лендинги</span><span data-en>Landing pages</span></h3>
+      <p><span data-ru>Продающие одностраничники с анимациями и высокой конверсией — под запуск продукта или услуги.</span><span data-en>High-converting one-pagers with animation — built to launch a product or service.</span></p>
+    </div>
+    <div class="about-card glass reveal" data-d="2">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+      <h3><span data-ru>Сайты</span><span data-en>Websites</span></h3>
+      <p><span data-ru>Многостраничные сайты, корпоративные и каталоги — адаптивные, быстрые и с чистым кодом.</span><span data-en>Multi-page, corporate and catalog sites — responsive, fast and cleanly coded.</span></p>
+    </div>
+  </div>
+
+  <div class="skills reveal" data-d="2" style="margin-top:34px">
+    <span class="chip">Python</span><span class="chip">aiogram</span><span class="chip">Telegram Bot API</span>
+    <span class="chip">JavaScript</span><span class="chip">React</span><span class="chip">Web App SDK</span>
+    <span class="chip">WebRTC</span><span class="chip">Node.js</span><span class="chip">PostgreSQL</span>
+    <span class="chip">Figma</span><span class="chip">REST API</span><span class="chip">Tailscale</span>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="wrap">
+  <div class="section-head reveal">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12H3z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      <span data-ru>Проекты</span><span data-en>Projects</span>
+    </span>
+    <h2><span data-ru>Над чем работал</span><span data-en>Stuff I've shipped</span></h2>
+    <p><span data-ru>Тут пара штук, которыми горжусь. Начну с того, что делал для себя и друзей.</span><span data-en>A couple things I'm proud of. Starting with the one I built for me and my friends.</span></p>
+  </div>
+
+  <div class="proj-grid">
+
+    <!-- PROJECT 1 — FEATURED: Allowed (real screenshots) -->
+    <article class="card glass feat reveal" data-d="1">
+      <div class="card-media">
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-url">a11owed · private mesh</span></div>
+          <div class="win-shot"><img id="allowed-main" src="screens/allowed-1.png" alt="Allowed — экран входа по инвайту" /></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Self-hosted · <span data-ru>приватный мессенджер</span><span data-en>private messenger</span></span>
+        <h3><span>a11owed</span>
+          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <div class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-ru>invite-only · 0 телеметрии</span><span data-en>invite-only · 0 telemetry</span></div>
+        <p><span data-ru>Приватный мессенджер для узкого круга. Голосовые и текстовые каналы, личка, совместное прослушивание музыки, реакции. Всё на своём сервере: вход по ключу, TLS, шифрование, Tailscale-mesh — никаких сборщиков данных.</span><span data-en>A private messenger for a small circle. Voice &amp; text channels, DMs, listen-together, reactions. Fully self-hosted: invite-key login, TLS, at-rest encryption, Tailscale mesh — zero data collectors.</span></p>
+        <div class="thumbs" id="allowed-thumbs">
+          <button class="active" data-src="screens/allowed-1.png" aria-label="Экран 1"><img src="screens/allowed-1.png" alt="" /></button>
+          <button data-src="screens/allowed-2.png" aria-label="Экран 2"><img src="screens/allowed-2.png" alt="" /></button>
+          <button data-src="screens/allowed-3.png" aria-label="Экран 3"><img src="screens/allowed-3.png" alt="" /></button>
+        </div>
+        <div class="tstack"><span>React</span><span>WebRTC</span><span>Node.js</span><span>Tailscale</span><span>TLS</span></div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 -->
+    <article class="card glass p2 reveal" data-d="1">
+      <!-- Заменить на: <div class="card-media"><img src="screens/mini-app.png" alt="Mini App"></div> -->
+      <div class="card-media"><div class="media-inner">
+        <div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-body"><div class="ln" style="width:70%"></div><div class="ln g" style="width:40%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:60%"></div></div></div>
+      </div></div>
+      <div class="card-body">
+        <span class="card-tag">TG Web App</span>
+        <h3><span><span data-ru>Каталог-витрина</span><span data-en>Catalog mini app</span></span>
+          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <p><span data-ru>Web App, который открывается прямо в чате и ощущается как нативное приложение — тема Telegram, свайпы, корзина. Клиент сначала не поверил, что это «всё ещё Телеграм».</span><span data-en>A Web App that opens right inside the chat and feels native — Telegram theming, swipes, cart. The client didn't believe it was &laquo;still Telegram&raquo; at first.</span></p>
+        <div class="tstack"><span>React</span><span>Web App SDK</span><span>Node.js</span></div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3 -->
+    <article class="card glass p3 reveal" data-d="2">
+      <!-- Заменить на: <div class="card-media"><img src="screens/landing.png" alt="Landing"></div> -->
+      <div class="card-media"><div class="media-inner">
+        <div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-body"><div class="ln g" style="width:65%"></div><div class="ln" style="width:95%"></div><div class="ln" style="width:50%"></div><div class="ln" style="width:78%"></div></div></div>
+      </div></div>
+      <div class="card-body">
+        <span class="card-tag">Landing</span>
+        <h3><span><span data-ru>Продающий лендинг</span><span data-en>Landing page</span></span>
+          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <p><span data-ru>Лендинг под запуск инфокурса. Сверстал за выходные, на анимациях не экономил. Конверсия вышла такая, что заказчик потом привёл ещё двоих друзей.</span><span data-en>A landing for an online course launch. Built it over a weekend, didn't skimp on the animations. Conversion was good enough that the client sent two friends my way.</span></p>
+        <div class="tstack"><span>HTML / CSS</span><span>JS</span><span>GSAP</span><span>Figma</span></div>
+      </div>
+    </article>
+
+    <!-- PROJECT 4 -->
+    <article class="card glass p4 reveal" data-d="1">
+      <!-- Заменить на: <div class="card-media"><img src="screens/website.png" alt="Website"></div> -->
+      <div class="card-media"><div class="media-inner">
+        <div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-body"><div class="ln" style="width:85%"></div><div class="ln" style="width:60%"></div><div class="ln g" style="width:45%"></div><div class="ln" style="width:92%"></div></div></div>
+      </div></div>
+      <div class="card-body">
+        <span class="card-tag">Website</span>
+        <h3><span><span data-ru>Корпоративный сайт</span><span data-en>Corporate site</span></span>
+          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <p><span data-ru>Сайт для небольшой студии: услуги, кейсы, формы заявок. Главное требование было «чтоб грузилось мгновенно даже с телефона в метро» — сделал.</span><span data-en>A site for a small studio: services, cases, lead forms. The one hard requirement was &laquo;must load instantly even on a phone in the subway&raquo; — done.</span></p>
+        <div class="tstack"><span>React</span><span>Next.js</span><span>REST API</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="wrap">
+  <div class="contact-card glass reveal">
+    <span class="eyebrow" style="margin-bottom:22px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+      <span data-ru>Контакты</span><span data-en>Contact</span>
+    </span>
+    <h2><span data-ru>Есть идея? Пиши в Телегу</span><span data-en>Got an idea? Ping me on Telegram</span></h2>
+    <p><span data-ru>Даже если это пока «сырая мысль на салфетке» — накидаю, как это можно собрать. Отвечаю обычно в тот же день.</span><span data-en>Even if it's still a &laquo;rough thought on a napkin&raquo; — I'll sketch out how to build it. Usually reply the same day.</span></p>
+    <div class="contact-actions">
+      <a href="https://t.me/yourusername" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1 .5l.36-5.1L18 5.5c.4-.36-.09-.56-.62-.2L6.9 12.16 1.9 10.6c-1.08-.34-1.1-1.08.23-1.6L20.5 2.86c.9-.34 1.68.2 1.4 1.44z"/></svg>
+        Telegram
+      </a>
+      <a href="mailto:you@example.com" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+        Email
+      </a>
+    </div>
+    <div class="socials">
+      <a href="https://t.me/yourusername" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1 .5l.36-5.1L18 5.5c.4-.36-.09-.56-.62-.2L6.9 12.16 1.9 10.6c-1.08-.34-1.1-1.08.23-1.6L20.5 2.86c.9-.34 1.68.2 1.4 1.44z"/></svg></a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.85 9.73.5.1.68-.22.68-.49v-1.7c-2.79.62-3.38-1.37-3.38-1.37-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+      <a href="https://instagram.com/yourusername" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot">
+      <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6-6 6 6"/><path d="M6 15l6 6 6-6"/></svg></span> Portfolio</div>
+      <div style="text-align:right">
+        <div class="hand" style="font-size:18px"><span data-ru>сделано руками, между двумя чашками кофе</span><span data-en>hand-made, between two cups of coffee</span></div>
+        <div style="font-size:12.5px;color:var(--text-3);margin-top:2px"><span data-ru>обновлено авг. 2026 · GMT+3</span><span data-en>updated Aug 2026 · GMT+3</span></div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<script>
+/* ===== LANG ===== */
+const root=document.documentElement;
+function setLang(l){
+  root.setAttribute('data-lang',l);
+  root.setAttribute('lang',l);
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.set===l));
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.set)));
+(function(){
+  let saved=null;try{saved=localStorage.getItem('lang')}catch(e){}
+  if(saved!=='ru'&&saved!=='en'){saved=(navigator.language||'ru').toLowerCase().startsWith('en')?'en':'ru';}
+  setLang(saved);
+})();
+
+/* ===== MOBILE MENU ===== */
+const mm=document.getElementById('mmenu');
+document.getElementById('burger').onclick=()=>mm.classList.add('open');
+document.getElementById('mclose').onclick=()=>mm.classList.remove('open');
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
+
+/* ===== ALLOWED GALLERY ===== */
+(function(){
+  const main=document.getElementById('allowed-main');
+  const thumbs=document.querySelectorAll('#allowed-thumbs button');
+  thumbs.forEach(b=>b.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    main.src=b.dataset.src;
+    thumbs.forEach(t=>t.classList.remove('active'));
+    b.classList.add('active');
+  }));
+})();
+
+/* ===== HERO SCENE PARALLAX ===== */
+(function(){
+  const hv=document.querySelector('.hero-visual');
+  const scene=hv&&hv.querySelector('.scene');
+  if(!scene)return;
+  if(!matchMedia('(hover:hover)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const wraps=[...scene.querySelectorAll('.g-wrap')];
+  hv.addEventListener('pointermove',e=>{
+    const r=hv.getBoundingClientRect();
+    const px=((e.clientX-r.left)/r.width-.5)*2;
+    const py=((e.clientY-r.top)/r.height-.5)*2;
+    wraps.forEach(w=>{const d=+w.dataset.depth||0;w.style.transform=`translate(${(px*d).toFixed(1)}px,${(py*d).toFixed(1)}px)`;});
+  });
+  hv.addEventListener('pointerleave',()=>wraps.forEach(w=>{w.style.transform='';}));
+})();
+
+/* ===== REVEAL ON SCROLL ===== */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== MARQUEE BUILD ===== */
+const items=[
+  ['Telegram Bots','Telegram-боты'],['Web Apps','TG Web App'],['Landing Pages','Лендинги'],
+  ['Websites','Сайты'],['Self-hosted','Self-hosted'],['Automation','Автоматизация'],['Voice / WebRTC','Голос / WebRTC']
+];
+const star='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6L5.7 21 8 13.8 2 9.4h7.6z"/></svg>';
+const mq=document.getElementById('mq');
+let html='';
+for(let k=0;k<2;k++){items.forEach(it=>{html+=`<span>${star}<b data-ru style="font-weight:500">${it[1]}</b><b data-en style="font-weight:500">${it[0]}</b></span>`})}
+mq.innerHTML=html;
+
+/* ===== NAV SHRINK ===== */
+addEventListener('scroll',()=>{
+  const n=document.querySelector('.nav');
+  if(scrollY>20){n.style.background='var(--surface-strong)';n.style.margin='10px auto'}
+  else{n.style.background='var(--surface)';n.style.margin='16px auto'}
+});
+
+/* ===== console note ===== */
+console.log('%c  Привет  ','background:#0E7A5C;color:#fff;font-weight:700;padding:4px 10px;border-radius:6px;font-size:13px');
+console.log('%cЗалез в консоль? Уважаю. Если ищешь, с кем собрать бота — пиши в Telegram, ссылка на сайте. — Артём','color:#0B6A4E;font-size:12px');
+</script>
+</body>
+</html>
