@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio — Telegram Bots, Web Apps, Landings</title>
-<meta name="description" content="Портфолио: Telegram-боты, TG Web App, лендинги и сайты." />
+<title>Дмитрий — Telegram-боты, Web App и сайты</title>
+<meta name="description" content="Портфолио: Telegram-боты, TG Web App, лендинги и сайты. Проекты: a11owed, HARDLINE." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,6 +43,9 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+:focus:not(:focus-visible){outline:none}
+body.menu-open{overflow:hidden}
 body{
   margin:0;
   font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -100,6 +103,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;transition:padding .4s va
 .nav-links a{padding:9px 15px;border-radius:100px;font-size:14.5px;color:var(--text-2);font-weight:500;transition:.25s var(--ease)}
 .nav-links a:hover{color:var(--text);background:rgba(34,28,20,0.05)}
 .nav-right{display:flex;align-items:center;gap:10px}
+.nav{transition:background .3s var(--ease),margin .3s var(--ease)}
+.nav.scrolled{background:var(--surface-strong);margin:10px auto}
 
 /* lang toggle */
 .lang{display:flex;padding:4px;border-radius:100px;background:rgba(34,28,20,0.05);border:1px solid var(--glass-border);position:relative}
@@ -235,7 +240,7 @@ html[data-lang="en"] .lang .pill{transform:translateX(100%)}
 
 /* ============ PROJECTS ============ */
 .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.card{border-radius:var(--radius-lg);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease);cursor:pointer;position:relative}
+.card{border-radius:var(--radius-lg);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease);position:relative}
 .card:hover{transform:translateY(-8px);box-shadow:var(--shadow-glow)}
 .card:hover .media-inner{transform:scale(1.04)}
 .card:hover .go{opacity:1;transform:translate(0,0)}
@@ -347,6 +352,16 @@ html[data-lang="en"] [data-en]{display:revert}
   #allowed-thumbs{display:none}
   .shot-nav{display:grid}
 }
+@media (max-width:380px){
+  .wrap{padding:0 16px}
+  .hero{padding-top:132px}
+  .hero h1{font-size:34px}
+  .hero p.lead{font-size:17px}
+  .stats{gap:22px}
+  .stat .n{font-size:26px}
+  .card-body,.card.feat .card-body{padding:22px}
+  .contact-card{padding:40px 20px}
+}
 @media (prefers-reduced-motion:reduce){
   *{animation:none !important;transition-duration:.01ms !important}
   html{scroll-behavior:auto}
@@ -379,16 +394,16 @@ html[data-lang="en"] [data-en]{display:revert}
       <a href="#contact" data-ru>Контакты</a><a href="#contact" data-en>Contact</a>
     </div>
     <div class="nav-right">
-      <div class="lang" role="group" aria-label="Language">
+      <div class="lang" role="group" aria-label="Язык / Language">
         <div class="pill" aria-hidden="true"></div>
-        <button data-set="ru" class="active">RU</button>
-        <button data-set="en">EN</button>
+        <button data-set="ru" class="active" aria-pressed="true" aria-label="Русский">RU</button>
+        <button data-set="en" aria-pressed="false" aria-label="English">EN</button>
       </div>
       <a href="#contact" class="btn btn-primary" style="padding:10px 18px">
         <span data-ru>Написать</span><span data-en>Get in touch</span>
       </a>
-      <button class="burger" aria-label="Menu" id="burger">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mmenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </nav>
@@ -403,7 +418,7 @@ html[data-lang="en"] [data-en]{display:revert}
   <a href="#contact" class="btn btn-primary"><span data-ru>Написать</span><span data-en>Get in touch</span></a>
 </div>
 
-<span id="top"></span>
+<main id="top">
 
 <!-- ============ HERO ============ -->
 <section class="hero wrap">
@@ -421,8 +436,8 @@ html[data-lang="en"] [data-en]{display:revert}
       </h1>
 
       <p class="lead reveal" data-d="2">
-        <span data-ru>Три года назад собрал первого бота за ночь — и залип. Теперь живу в Bot API, пишу на Python, а ради красивого лендинга ухожу во фронтенд. Шаблоны и лишние клики не люблю.</span>
-        <span data-en>Three years ago I hacked together my first bot overnight and got hooked. Now I basically live in the Bot API, write Python, and dip into frontend whenever a landing deserves it. Not a fan of templates or extra clicks.</span>
+        <span data-ru>В 2021-м собрал первого бота за ночь — и залип. Теперь живу в Bot API, пишу на Python, а ради красивого лендинга ухожу во фронтенд. Шаблоны и лишние клики не люблю.</span>
+        <span data-en>Back in 2021 I hacked together my first bot overnight and got hooked. Now I basically live in the Bot API, write Python, and dip into frontend whenever a landing deserves it. Not a fan of templates or extra clicks.</span>
       </p>
 
       <div class="now reveal" data-d="2">
@@ -572,15 +587,14 @@ html[data-lang="en"] [data-en]{display:revert}
       <div class="card-media">
         <div class="win">
           <div class="win-bar"><i></i><i></i><i></i><span class="win-url">a11owed · private mesh</span></div>
-          <div class="win-shot"><img id="allowed-main" src="screens/allowed-1.png" alt="Allowed — экран входа по инвайту" /></div>
+          <div class="win-shot"><img id="allowed-main" src="screens/allowed-1.png" alt="Allowed — экран входа по инвайту" loading="lazy" width="2560" height="1600" /></div>
         </div>
         <button class="shot-nav prev" id="allowed-prev" aria-label="Предыдущий скрин"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
         <button class="shot-nav next" id="allowed-next" aria-label="Следующий скрин"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
       <div class="card-body">
         <span class="card-tag">Self-hosted · <span data-ru>приватный мессенджер</span><span data-en>private messenger</span></span>
-        <h3><span>a11owed</span>
-          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <h3><span>a11owed</span></h3>
         <div class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-ru>invite-only · 0 телеметрии</span><span data-en>invite-only · 0 telemetry</span></div>
         <p><span data-ru>Приватный мессенджер для узкого круга. Голосовые и текстовые каналы, личка, совместное прослушивание музыки, реакции. Всё на своём сервере: вход по ключу, TLS, шифрование, Tailscale-mesh — никаких сборщиков данных.</span><span data-en>A private messenger for a small circle. Voice &amp; text channels, DMs, listen-together, reactions. Fully self-hosted: invite-key login, TLS, at-rest encryption, Tailscale mesh — zero data collectors.</span></p>
         <div class="thumbs" id="allowed-thumbs">
@@ -592,51 +606,17 @@ html[data-lang="en"] [data-en]{display:revert}
       </div>
     </article>
 
-    <!-- PROJECT 2 -->
-    <article class="card glass p2 reveal" data-d="1">
-      <!-- Заменить на: <div class="card-media"><img src="screens/mini-app.png" alt="Mini App"></div> -->
-      <div class="card-media"><div class="media-inner">
-        <div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i></div>
-          <div class="mock-body"><div class="ln" style="width:70%"></div><div class="ln g" style="width:40%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:60%"></div></div></div>
-      </div></div>
-      <div class="card-body">
-        <span class="card-tag">TG Web App</span>
-        <h3><span><span data-ru>Каталог-витрина</span><span data-en>Catalog mini app</span></span>
-          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
-        <p><span data-ru>Web App, который открывается прямо в чате и ощущается как нативное приложение — тема Telegram, свайпы, корзина. Клиент сначала не поверил, что это «всё ещё Телеграм».</span><span data-en>A Web App that opens right inside the chat and feels native — Telegram theming, swipes, cart. The client didn't believe it was &laquo;still Telegram&raquo; at first.</span></p>
-        <div class="tstack"><span>React</span><span>Web App SDK</span><span>Node.js</span></div>
+    <!-- PROJECT 2 — HARDLINE (real) -->
+    <article class="card glass reveal" data-d="2">
+      <div class="card-media">
+        <img src="screens/hardline.png" alt="HARDLINE — лендинг компьютерного клуба" loading="lazy" width="758" height="470" />
       </div>
-    </article>
-
-    <!-- PROJECT 3 -->
-    <article class="card glass p3 reveal" data-d="2">
-      <!-- Заменить на: <div class="card-media"><img src="screens/landing.png" alt="Landing"></div> -->
-      <div class="card-media"><div class="media-inner">
-        <div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i></div>
-          <div class="mock-body"><div class="ln g" style="width:65%"></div><div class="ln" style="width:95%"></div><div class="ln" style="width:50%"></div><div class="ln" style="width:78%"></div></div></div>
-      </div></div>
       <div class="card-body">
-        <span class="card-tag">Landing</span>
-        <h3><span><span data-ru>Продающий лендинг</span><span data-en>Landing page</span></span>
-          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
-        <p><span data-ru>Лендинг под запуск инфокурса. Сверстал за выходные, на анимациях не экономил. Конверсия вышла такая, что заказчик потом привёл ещё двоих друзей.</span><span data-en>A landing for an online course launch. Built it over a weekend, didn't skimp on the animations. Conversion was good enough that the client sent two friends my way.</span></p>
-        <div class="tstack"><span>HTML / CSS</span><span>JS</span><span>GSAP</span><span>Figma</span></div>
-      </div>
-    </article>
-
-    <!-- PROJECT 4 -->
-    <article class="card glass p4 reveal" data-d="1">
-      <!-- Заменить на: <div class="card-media"><img src="screens/website.png" alt="Website"></div> -->
-      <div class="card-media"><div class="media-inner">
-        <div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i></div>
-          <div class="mock-body"><div class="ln" style="width:85%"></div><div class="ln" style="width:60%"></div><div class="ln g" style="width:45%"></div><div class="ln" style="width:92%"></div></div></div>
-      </div></div>
-      <div class="card-body">
-        <span class="card-tag">Website</span>
-        <h3><span><span data-ru>Корпоративный сайт</span><span data-en>Corporate site</span></span>
-          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
-        <p><span data-ru>Сайт для небольшой студии: услуги, кейсы, формы заявок. Главное требование было «чтоб грузилось мгновенно даже с телефона в метро» — сделал.</span><span data-en>A site for a small studio: services, cases, lead forms. The one hard requirement was &laquo;must load instantly even on a phone in the subway&raquo; — done.</span></p>
-        <div class="tstack"><span>React</span><span>Next.js</span><span>REST API</span></div>
+        <span class="card-tag">Landing · <span data-ru>киберклуб</span><span data-en>gaming club</span></span>
+        <h3><span>HARDLINE</span></h3>
+        <div class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-ru>3D-сцена + live-карта 25 ПК</span><span data-en>3D scene + live map of 25 PCs</span></div>
+        <p><span data-ru>Лендинг компьютерного клуба: тарифы, интерактивная карта зала со свободными местами в реальном времени, правила и контакты. WebGL-сцена на Three.js, тёмная «металлическая» эстетика, плавные 60 fps.</span><span data-en>A landing for a gaming club: tariffs, an interactive floor map showing free seats in real time, rules and contacts. A Three.js WebGL scene, dark metallic aesthetic, smooth 60 fps.</span></p>
+        <div class="tstack"><span>Astro</span><span>Three.js</span><span>WebGL</span><span>GSAP</span></div>
       </div>
     </article>
 
@@ -657,36 +637,46 @@ html[data-lang="en"] [data-en]{display:revert}
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1 .5l.36-5.1L18 5.5c.4-.36-.09-.56-.62-.2L6.9 12.16 1.9 10.6c-1.08-.34-1.1-1.08.23-1.6L20.5 2.86c.9-.34 1.68.2 1.4 1.44z"/></svg>
         Telegram
       </a>
-      <a href="mailto:you@example.com" class="btn btn-ghost">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
-        Email
+      <a href="https://github.com/xarivel1-netizen" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.85 9.73.5.1.68-.22.68-.49v-1.7c-2.79.62-3.38-1.37-3.38-1.37-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        GitHub
       </a>
     </div>
     <div class="socials">
-      <a href="https://t.me/XarArtemi" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1 .5l.36-5.1L18 5.5c.4-.36-.09-.56-.62-.2L6.9 12.16 1.9 10.6c-1.08-.34-1.1-1.08.23-1.6L20.5 2.86c.9-.34 1.68.2 1.4 1.44z"/></svg></a>
-      <a href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.85 9.73.5.1.68-.22.68-.49v-1.7c-2.79.62-3.38-1.37-3.38-1.37-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
-      <a href="https://instagram.com/yourusername" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+      <a href="https://t.me/XarArtemi" target="_blank" rel="noopener noreferrer" aria-label="Telegram — @XarArtemi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1 .5l.36-5.1L18 5.5c.4-.36-.09-.56-.62-.2L6.9 12.16 1.9 10.6c-1.08-.34-1.1-1.08.23-1.6L20.5 2.86c.9-.34 1.68.2 1.4 1.44z"/></svg></a>
+      <a href="https://github.com/xarivel1-netizen" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.85 9.73.5.1.68-.22.68-.49v-1.7c-2.79.62-3.38-1.37-3.38-1.37-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
     </div>
   </div>
-
-  <footer>
-    <div class="foot">
-      <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6-6 6 6"/><path d="M6 15l6 6 6-6"/></svg></span> Portfolio</div>
-      <div style="text-align:right">
-        <div class="hand" style="font-size:18px"><span data-ru>сделано руками, между двумя чашками кофе</span><span data-en>hand-made, between two cups of coffee</span></div>
-        <div style="font-size:12.5px;color:var(--text-3);margin-top:2px"><span data-ru>обновлено авг. 2026 · GMT+3</span><span data-en>updated Aug 2026 · GMT+3</span></div>
-      </div>
-    </div>
-  </footer>
 </section>
+</main>
+
+<footer>
+  <div class="foot wrap">
+    <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6-6 6 6"/><path d="M6 15l6 6 6-6"/></svg></span> Portfolio</div>
+    <div style="text-align:right">
+      <div class="hand" style="font-size:18px"><span data-ru>сделано руками, между двумя чашками кофе</span><span data-en>hand-made, between two cups of coffee</span></div>
+      <div style="font-size:12.5px;color:var(--text-3);margin-top:2px"><span data-ru>обновлено сентябрь 2026</span><span data-en>updated Sep 2026</span></div>
+    </div>
+  </div>
+</footer>
 
 <script>
 /* ===== LANG ===== */
 const root=document.documentElement;
+const META={
+  ru:{t:'Дмитрий — Telegram-боты, Web App и сайты',d:'Портфолио: Telegram-боты, TG Web App, лендинги и сайты. Проекты: a11owed, HARDLINE.'},
+  en:{t:'Dmitry — Telegram bots, Web Apps & websites',d:'Portfolio: Telegram bots, TG Web Apps, landing pages and websites. Projects: a11owed, HARDLINE.'}
+};
+const metaDesc=document.querySelector('meta[name="description"]');
 function setLang(l){
   root.setAttribute('data-lang',l);
   root.setAttribute('lang',l);
-  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.set===l));
+  document.querySelectorAll('.lang button').forEach(b=>{
+    const on=b.dataset.set===l;
+    b.classList.toggle('active',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+  });
+  if(META[l]){document.title=META[l].t; if(metaDesc)metaDesc.setAttribute('content',META[l].d);}
   try{localStorage.setItem('lang',l)}catch(e){}
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.set)));
@@ -698,9 +688,18 @@ document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',
 
 /* ===== MOBILE MENU ===== */
 const mm=document.getElementById('mmenu');
-document.getElementById('burger').onclick=()=>mm.classList.toggle('open');
-document.getElementById('mclose').onclick=()=>mm.classList.remove('open');
-mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
+const burger=document.getElementById('burger');
+function setMenu(open){
+  mm.classList.toggle('open',open);
+  document.body.classList.toggle('menu-open',open);
+  burger.setAttribute('aria-expanded',open?'true':'false');
+  if(open){const f=mm.querySelector('a,button');f&&f.focus();}
+  else burger.focus();
+}
+burger.onclick=()=>setMenu(!mm.classList.contains('open'));
+document.getElementById('mclose').onclick=()=>setMenu(false);
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mm.classList.contains('open'))setMenu(false);});
 
 /* ===== ALLOWED GALLERY ===== */
 (function(){
@@ -751,12 +750,14 @@ let html='';
 for(let k=0;k<2;k++){items.forEach(it=>{html+=`<span>${star}<b data-ru style="font-weight:500">${it[1]}</b><b data-en style="font-weight:500">${it[0]}</b></span>`})}
 mq.innerHTML=html;
 
-/* ===== NAV SHRINK ===== */
-addEventListener('scroll',()=>{
+/* ===== NAV SHRINK (rAF + class) ===== */
+(function(){
   const n=document.querySelector('.nav');
-  if(scrollY>20){n.style.background='var(--surface-strong)';n.style.margin='10px auto'}
-  else{n.style.background='var(--surface)';n.style.margin='16px auto'}
-});
+  let ticking=false;
+  function upd(){n.classList.toggle('scrolled',scrollY>20);ticking=false;}
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true});
+  upd();
+})();
 
 /* ===== console note ===== */
 console.log('%c  Привет  ','background:#0E7A5C;color:#fff;font-weight:700;padding:4px 10px;border-radius:6px;font-size:13px');
