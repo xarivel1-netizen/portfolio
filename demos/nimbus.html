@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nimbus — аналитика без боли</title>
+<meta name="description" content="Демо-лендинг SaaS-аналитики Nimbus." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#0B0F1A;--card:rgba(255,255,255,.04);--bd:rgba(255,255,255,.09);--tx:#EAF0FF;--tx2:#9AA6C4;--a1:#6366F1;--a2:#22D3EE;--grad:linear-gradient(120deg,#818CF8,#6366F1 45%,#22D3EE)}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.d{font-family:'Sora',sans-serif;letter-spacing:-.02em;line-height:1.08}
+a{color:inherit;text-decoration:none}
+.bgfx{position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 90% at 80% -10%,#1a2140,transparent 55%),radial-gradient(90% 70% at 0% 0%,#12263a,transparent 50%),var(--bg)}
+.blob{position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);opacity:.4}
+.b1{width:520px;height:520px;background:#4f46e5;top:-160px;right:-120px}
+.b2{width:440px;height:440px;background:#0891b2;bottom:-160px;left:-120px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(11,15,26,.6);border-bottom:1px solid var(--bd)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Sora';font-weight:700;font-size:18px}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center}
+.logo i svg{width:17px;height:17px;color:#0B0F1A}
+.nlinks{display:flex;gap:26px;color:var(--tx2);font-size:14.5px;font-weight:500}
+.nlinks a:hover{color:var(--tx)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:.25s}
+.btn svg{width:16px;height:16px}
+.bp{background:var(--grad);color:#0B0F1A}.bp:hover{transform:translateY(-2px)}
+.bg2{background:var(--card);border-color:var(--bd);color:var(--tx)}.bg2:hover{background:rgba(255,255,255,.08)}
+.hero{padding:96px 0 70px;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#A5B4FC;background:rgba(99,102,241,.12);border:1px solid var(--bd);padding:6px 13px;border-radius:100px;text-transform:uppercase;letter-spacing:.06em}
+.hero h1{font-size:clamp(38px,5.4vw,60px);font-weight:700;margin:20px 0}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--tx2);font-size:18px;max-width:480px;margin-bottom:30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.trust{margin-top:34px;display:flex;gap:26px;color:var(--tx2);font-size:13px;flex-wrap:wrap}
+.trust b{color:var(--tx);font-family:'Sora';font-size:22px;font-weight:700;display:block}
+.panel{border-radius:20px;background:var(--card);border:1px solid var(--bd);padding:20px;box-shadow:0 40px 90px -40px rgba(34,211,238,.3)}
+.pnl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.pnl-top h3{font-size:15px}.pnl-top .up{font-size:12px;color:#34D399;font-weight:600}
+.bars{display:flex;align-items:flex-end;gap:10px;height:140px}
+.bars i{flex:1;border-radius:7px 7px 0 0;background:var(--grad);opacity:.85}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.mc{background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:13px;padding:13px 15px}
+.mc small{color:var(--tx2);font-size:12px}.mc b{font-family:'Sora';font-size:20px;display:block;margin-top:3px}
+.sec{padding:70px 0}
+.ey{text-align:center;color:#A5B4FC;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+.sec h2{text-align:center;font-size:clamp(28px,4vw,40px);font-weight:700;margin:12px 0 44px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.f{border-radius:18px;background:var(--card);border:1px solid var(--bd);padding:26px}
+.f .ic{width:46px;height:46px;border-radius:13px;background:rgba(99,102,241,.14);display:grid;place-items:center;margin-bottom:16px}
+.f .ic svg{width:23px;height:23px;color:#A5B4FC}
+.f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--tx2);font-size:14.5px}
+.cend{border-radius:24px;background:var(--grad);padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+.cend h2{color:#0B0F1A;font-size:clamp(26px,4vw,40px)}
+.cend p{color:rgba(11,15,26,.75);margin:12px 0 26px;font-weight:500}
+.cend .btn{background:#0B0F1A;color:#fff}
+footer{padding:40px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:13.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px}.feat{grid-template-columns:1fr}.nlinks{display:none}}
+</style>
+</head>
+<body>
+<div class="bgfx"></div><div class="blob b1"></div><div class="blob b2"></div>
+<nav><div class="wrap nav">
+  <div class="logo"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></i>Nimbus</div>
+  <div class="nlinks"><a href="#">Возможности</a><a href="#">Цены</a><a href="#">Клиенты</a><a href="#">Блог</a></div>
+  <a class="btn bp">Начать бесплатно</a>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <span class="pill">аналитика продукта</span>
+    <h1>Данные, которые <span>объясняют</span>, а не пугают</h1>
+    <p>Nimbus собирает события, считает воронки и показывает, где вы теряете пользователей — за 5 минут без аналитика в штате.</p>
+    <div class="cta">
+      <a class="btn bp">Попробовать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn bg2">Смотреть демо</a>
+    </div>
+    <div class="trust"><div><b>12k+</b>команд</div><div><b>4.9/5</b>рейтинг</div><div><b>99.99%</b>uptime</div></div>
+  </div>
+  <div class="panel">
+    <div class="pnl-top"><h3>Активность за неделю</h3><span class="up">▲ 18.4%</span></div>
+    <div class="bars"><i style="height:45%"></i><i style="height:62%"></i><i style="height:38%"></i><i style="height:78%"></i><i style="height:55%"></i><i style="height:88%"></i><i style="height:70%"></i></div>
+    <div class="mini"><div class="mc"><small>Активные</small><b>8 421</b></div><div class="mc"><small>Конверсия</small><b>6.2%</b></div></div>
+  </div>
+</header>
+
+<section class="sec wrap">
+  <div class="ey">почему Nimbus</div>
+  <h2>Всё, что нужно продукту</h2>
+  <div class="feat">
+    <div class="f"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></div><h3>Воронки</h3><p>Стройте воронки перетаскиванием и видьте, на каком шаге уходят люди.</p></div>
+    <div class="f"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Реальное время</h3><p>События прилетают за секунды. Дашборды обновляются без перезагрузки.</p></div>
+    <div class="f"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.4h7.6z"/></svg></div><h3>Инсайты</h3><p>Аномалии и тренды подсвечиваются автоматически — без ручного копания.</p></div>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <div class="cend">
+    <h2>Первая метрика — через 5 минут</h2>
+    <p>Бесплатно до 100k событий в месяц. Карта не нужна.</p>
+    <a class="btn">Создать проект</a>
+  </div>
+</section>
+
+<footer class="wrap"><div>© 2026 Nimbus — демо-концепт</div><div>Сделано для портфолио</div></footer>
+</body>
+</html>

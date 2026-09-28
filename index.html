@@ -241,6 +241,8 @@ html[data-lang="en"] .lang .pill{transform:translateX(100%)}
 /* ============ PROJECTS ============ */
 .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 .card{border-radius:var(--radius-lg);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease);position:relative}
+a.card,.cardlink{cursor:pointer;display:block;color:inherit}
+a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .card:hover{transform:translateY(-8px);box-shadow:var(--shadow-glow)}
 .card:hover .media-inner{transform:scale(1.04)}
 .card:hover .go{opacity:1;transform:translate(0,0)}
@@ -577,7 +579,7 @@ html[data-lang="en"] [data-en]{display:revert}
       <span data-ru>Проекты</span><span data-en>Projects</span>
     </span>
     <h2><span data-ru>Над чем работал</span><span data-en>Stuff I've shipped</span></h2>
-    <p><span data-ru>Тут пара штук, которыми горжусь. Начну с того, что делал для себя и друзей.</span><span data-en>A couple things I'm proud of. Starting with the one I built for me and my friends.</span></p>
+    <p><span data-ru>Реальные проекты и демо-концепты. Демо можно открыть и потыкать — они живые, собраны с нуля.</span><span data-en>Real projects and demo concepts. The demos are live — open and click around, all built from scratch.</span></p>
   </div>
 
   <div class="proj-grid">
@@ -619,6 +621,39 @@ html[data-lang="en"] [data-en]{display:revert}
         <div class="tstack"><span>Astro</span><span>Three.js</span><span>WebGL</span><span>GSAP</span></div>
       </div>
     </article>
+
+    <!-- PROJECT 3 — Nimbus demo (live) -->
+    <a class="card glass reveal" href="demos/nimbus.html" target="_blank" rel="noopener" data-d="1">
+      <div class="card-media"><img src="screens/demo-nimbus.png" alt="Nimbus — демо SaaS-лендинга" loading="lazy" width="1400" height="880" /></div>
+      <div class="card-body">
+        <span class="card-tag"><span data-ru>Демо · SaaS-лендинг</span><span data-en>Demo · SaaS landing</span></span>
+        <h3><span>Nimbus</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <p><span data-ru>Лендинг аналитического сервиса: живой дашборд, воронки, чёткая типографика и адаптив. Дизайн и вёрстка с нуля.</span><span data-en>A landing for an analytics product: live dashboard, funnels, crisp typography, fully responsive. Designed and coded from scratch.</span></p>
+        <div class="tstack"><span>HTML / CSS</span><span>JS</span><span>Responsive</span></div>
+      </div>
+    </a>
+
+    <!-- PROJECT 4 — Verde demo (live) -->
+    <a class="card glass reveal" href="demos/verde.html" target="_blank" rel="noopener" data-d="2">
+      <div class="card-media"><img src="screens/demo-verde.png" alt="Verde — демо лендинга кофейни" loading="lazy" width="1400" height="880" /></div>
+      <div class="card-body">
+        <span class="card-tag"><span data-ru>Демо · кофейня</span><span data-en>Demo · coffee shop</span></span>
+        <h3><span>Verde Coffee</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <p><span data-ru>Тёплый editorial-лендинг для кофейни: меню, часы, акцент на фото и крупной типографике. Другой стиль — та же аккуратность.</span><span data-en>A warm editorial landing for a coffee shop: menu, hours, big type and imagery. Different vibe — same craft.</span></p>
+        <div class="tstack"><span>HTML / CSS</span><span>Fraunces</span><span>Responsive</span></div>
+      </div>
+    </a>
+
+    <!-- PROJECT 5 — Fold demo (live) -->
+    <a class="card glass reveal" href="demos/fold.html" target="_blank" rel="noopener" data-d="1">
+      <div class="card-media"><img src="screens/demo-fold.png" alt="FOLD — демо лендинга креативной студии" loading="lazy" width="1400" height="880" /></div>
+      <div class="card-body">
+        <span class="card-tag"><span data-ru>Демо · креатив-студия</span><span data-en>Demo · creative studio</span></span>
+        <h3><span>FOLD Studio</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></h3>
+        <p><span data-ru>Смелый тёмный лендинг агентства: брутальная типографика, неон, сетка работ. Показать, что умею и в «громкий» дизайн.</span><span data-en>A bold dark agency landing: brutalist type, neon accent, work grid. Proof I can do loud design too.</span></p>
+        <div class="tstack"><span>HTML / CSS</span><span>Bricolage</span><span>Responsive</span></div>
+      </div>
+    </a>
 
   </div>
 </section>
